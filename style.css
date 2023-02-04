@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    padding: 20px;
+}
+
+#booklist {
+    border: 1px solid red;
+}
+
+.card {
+    border: 1px solid blue;
+    margin: 5px;
+    padding: 5px;
+    display: inline-block;
+}
