@@ -7,10 +7,55 @@
     <title>My Library</title>
     <link rel="stylesheet" href="./style.css">
     <script src="./javascript.js" defer></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+    rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <div id="header">
+        <h1>My Library</h1>
+        <button><span class="material-icons-sharp">post_add</span> Add Book</button>
+    </div>
+
     <div id="booklist"></div>
+
+    <div id="newbook">
+        <form>
+            <fieldset>
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title">
+            </fieldset>
+            <fieldset>
+                <label for="author">Author</label>
+                <input type="text" id="author" name="author">
+            </fieldset>
+            <fieldset>
+                Have you read it?
+                <input type="radio" id="yes" name="read" value="yes">
+                <label for="yes">Yes</label>
+                <input type="radio" id="no" name="read" value="no">
+                <label for="no">No</label>
+                <input type="radio" id="current" name="read" value="current">
+                <label for="current">Currently reading</label>
+            </fieldset>
+            <fieldset>
+                Rating
+                <input type="radio" id="1" name="rating" value="1">
+                <label for="1">1</label>
+                <input type="radio" id="2" name="rating" value="2">
+                <label for="2">2</label>
+                <input type="radio" id="3" name="rating" value="3">
+                <label for="3">3</label>
+                <input type="radio" id="4" name="rating" value="4">
+                <label for="4">4</label>
+                <input type="radio" id="5" name="rating" value="5">
+                <label for="5">5</label>
+            </fieldset>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
     
 </body>
 </html>

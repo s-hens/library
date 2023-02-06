@@ -12,6 +12,7 @@ let myLibrary = [
         rating: "Good"
     }
 ];
+
 let bookList = document.getElementById("booklist");
 
 function Book(title, author, read, rating) {

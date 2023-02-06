@@ -1,15 +1,56 @@
 body {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    font-family: 'Crimson Text', serif;
+    font-weight: 400;
+    font-size: 18px;
+    background-color: #F4F1EA;
+}
+
+#header {
+    padding: 20px 40px 0;
+    color: #806F58;
+}
+
+button {
+    font-family: 'Crimson Text', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #4DB6AC;
+    background-color: #F4F1EA;
+    padding: 0;
+    border: 0;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.material-icons-sharp {
+    font-size: 18px;
+    transform: translateY(3px);
+}
+
+h1 {
+    margin: 0;
+    font-size: 60px;
+    font-weight: 600;
+    font-style: italic;
 }
 
 #booklist {
-    border: 1px solid red;
+    padding: 20px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));;
 }
 
 .card {
-    border: 1px solid blue;
-    margin: 5px;
-    padding: 5px;
-    display: inline-block;
+    padding: 10px;
+    background-color: #FFFFFF;
+    border-left: 5px solid #90816D;
+}
+
+#newbook {
+    display: none;
 }
