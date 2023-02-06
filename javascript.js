@@ -37,6 +37,45 @@ function showForm() {
 }
 
 
+// Enable rating only if book is marked as read
+
+readButton = document.getElementById("read");
+
+readButtons = document.getElementsByName("read");
+readButtons.forEach (button => button.addEventListener("change", enableRating));
+
+let ratingDiv = document.getElementById("rating");
+
+function enableRating() {
+    if (readButton.checked) {
+        ratingDiv.style.display = "block";
+    } else {
+        ratingDiv.style.display = "none";
+        for (i = 0; i < 5; i++) {
+            document.getElementsByName("rating")[i].checked = false;
+        }
+    }
+}
+
+
+// Style rating input
+
+stars = ratingDiv.querySelectorAll("label");
+
+stars.forEach (star => star.addEventListener("click", test));
+stars.forEach (star => star.addEventListener("mouseover", test));
+
+function test() {
+    stars.forEach((star) => {
+        if (Number(star.getAttribute("for")) <= Number(this.getAttribute("for"))) {
+            star.style.color = "#4DB6AC";
+        } else {
+            star.style.color = "#E3E0DA";
+        }
+    })
+}
+
+
 // Add book to list
 
 function Book(title, author, readStatus, rating, notes) {
@@ -84,27 +123,6 @@ function addBook() {
 
 let submit = document.getElementById("submit");
 submit.addEventListener("click", addBook);
-
-
-// Enable rating if book is marked as read
-
-readButton = document.getElementById("read");
-
-readButtons = document.getElementsByName("read");
-readButtons.forEach (button => button.addEventListener("change", enableRating));
-
-let ratingDiv = document.getElementById("rating");
-
-function enableRating() {
-    if (readButton.checked) {
-        ratingDiv.style.display = "block";
-    } else {
-        ratingDiv.style.display = "none";
-        for (i = 0; i < 5; i++) {
-            document.getElementsByName("rating")[i].checked = false;
-        }
-    }
-}
 
 
 // Display book list

@@ -203,3 +203,18 @@ input[type="radio"]:checked {
 #rating {
     display: none;
 }
+
+input[name="rating"] {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+}
+
+input[name="rating"] + label {
+    color: #E3E0DA;
+}
+
+input[name="rating"] + label:hover {
+    color: #4DB6AC;
+    cursor: pointer;
+}
