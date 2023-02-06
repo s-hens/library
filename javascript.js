@@ -17,6 +17,7 @@ let myLibrary = [
     }
 ];
 
+
 // Display "new book" form
 
 let openForm = document.getElementById("open-form");
@@ -28,7 +29,6 @@ closeForm.addEventListener("click", showForm);
 let newBookDiv = document.getElementById("new-book-form1");
 
 function showForm() {
-    console.log("test");
     if (newBookDiv.style.display == "block") {
         newBookDiv.style.display = "none";
     } else {
@@ -36,7 +36,8 @@ function showForm() {
     }
 }
 
-// Adding books to the list
+
+// Add book to list
 
 function Book(title, author, readStatus, rating, notes) {
     this.title = title;
@@ -84,7 +85,26 @@ function addBook() {
 let submit = document.getElementById("submit");
 submit.addEventListener("click", addBook);
 
-// Displaying book list
+
+// Enable rating if book is marked as read
+
+readButton = document.getElementById("read");
+
+readButtons = document.getElementsByName("read");
+readButtons.forEach (button => button.addEventListener("change", enableRating));
+
+let ratings = document.getElementsByName("rating");
+
+function enableRating() {
+    if (readButton.checked) {
+        ratings.forEach (input => input.disabled = false);
+    } else {
+        ratings.forEach (input => input.disabled = true);
+    }
+}
+
+
+// Display book list
 
 function display(book) {
     let div = document.createElement("div");
