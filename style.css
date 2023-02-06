@@ -28,18 +28,34 @@ button:hover {
     transform: translateY(5px);
 }
 
-/* Header */
-
-#header {
-    padding: 20px 40px 0;
-    color: #806F58;
-}
-
 h1 {
     margin: 0;
     font-size: 60px;
     font-weight: 600;
     font-style: italic;
+    color: #806F58;
+}
+
+h2 {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 600;
+    font-style: italic;
+    color: #806F58;
+}
+
+h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #806F58;
+    display: inline;
+}
+
+/* Header */
+
+#header {
+    padding: 20px 40px 0;
 }
 
 #header button {
@@ -88,14 +104,6 @@ h1 {
     color: #806F58;
 }
 
-h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 700;
-    color: #806F58;
-    display: inline;
-}
-
 .buttons {
     height: 100%;
     vertical-align: bottom;
@@ -110,3 +118,55 @@ h3 {
 }
 
 /* Add Book  */
+
+#new-book-form1 {
+    display: none;
+}
+
+#new-book-form2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(51, 51, 51, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#new-book-form3 {
+    width: fit-content;
+    height: fit-content;
+    align-self: center;
+    background-color: #FFFFFF;
+    padding: 20px;
+}
+
+#new-book-form3 button {
+    font-size: 24px;
+    background-color: #FFFFFF;
+}
+
+#new-book-form-header {
+    padding: 0 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#new-book-form-submit {
+    padding: 10px 10px 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    resize: none;
+}

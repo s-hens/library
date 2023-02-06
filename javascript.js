@@ -1,3 +1,5 @@
+// Book list
+
 let myLibrary = [
     {
         title: "Norse Mythology",
@@ -15,7 +17,26 @@ let myLibrary = [
     }
 ];
 
-let bookList = document.getElementById("booklist");
+// Display "new book" form
+
+let openForm = document.getElementById("open-form");
+openForm.addEventListener("click", showForm);
+
+let closeForm = document.getElementById("close-form");
+closeForm.addEventListener("click", showForm);
+
+let newBookDiv = document.getElementById("new-book-form1");
+
+function showForm() {
+    console.log("test");
+    if (newBookDiv.style.display == "block") {
+        newBookDiv.style.display = "none";
+    } else {
+        newBookDiv.style.display = "block";
+    }
+}
+
+// Adding books to the list
 
 function Book(title, author, readStatus, rating, notes) {
     this.title = title;
@@ -24,32 +45,6 @@ function Book(title, author, readStatus, rating, notes) {
     this.rating = rating;
     this.notes = notes;
 }
-
-function display(book) {
-    let div = document.createElement("div");
-    let star = `<span class="material-icons-sharp">star_rate</span>`;
-    let emptyStar = `<span class="material-icons-sharp">star_outline</span>`;
-    div.innerHTML = `
-    <div class="cardinfo">
-    <span class="title">${book.title}</span>
-    by <span class="author">${book.author}</span>
-    </div>
-    <div class="cardinfo">
-    <h3>Status:</h3> ${book.readStatus}
-    </div>
-    <div class="cardinfo">
-    <h3>Rating:</h3> ${star.repeat(book.rating)}${emptyStar.repeat(5 - book.rating)} 
-    </div>
-    <div class="cardinfo">
-    <h3>Notes:</h3> ${book.notes}
-    </div>
-    <div class="buttons"><button class="edit"><span class="material-icons-sharp">edit</span> Edit</button><button class="delete"><span class="material-icons-sharp">delete</span> Delete</button></div>
-    `;
-    div.classList.add("card");
-    bookList.appendChild(div);
-}
-
-myLibrary.forEach(book => display(book));
 
 function addBook() {
     //Prevent page refresh on form submission
@@ -82,10 +77,37 @@ function addBook() {
     myLibrary.push(myBook);
     //Display new book on page
     display(myBook);
+    showForm();
+    document.getElementById("new-book-form").reset();
 }
 
 let submit = document.getElementById("submit");
-
 submit.addEventListener("click", addBook);
 
-//addBook();
+// Displaying book list
+
+function display(book) {
+    let div = document.createElement("div");
+    let star = `<span class="material-icons-sharp">star_rate</span>`;
+    let emptyStar = `<span class="material-icons-sharp">star_outline</span>`;
+    div.innerHTML = `
+    <div class="cardinfo">
+    <span class="title">${book.title}</span>
+    by <span class="author">${book.author}</span>
+    </div>
+    <div class="cardinfo">
+    <h3>Status:</h3> ${book.readStatus}
+    </div>
+    <div class="cardinfo">
+    <h3>Rating:</h3> ${star.repeat(book.rating)}${emptyStar.repeat(5 - book.rating)} 
+    </div>
+    <div class="cardinfo">
+    <h3>Notes:</h3> ${book.notes}
+    </div>
+    <div class="buttons"><button class="edit"><span class="material-icons-sharp">edit</span> Edit</button><button class="delete"><span class="material-icons-sharp">delete</span> Delete</button></div>
+    `;
+    div.classList.add("card");
+    document.getElementById("booklist").appendChild(div);
+}
+
+myLibrary.forEach(book => display(book));
