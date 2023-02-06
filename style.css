@@ -1,34 +1,38 @@
+/* Global */
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Crimson Text', serif;
     font-weight: 400;
     font-size: 18px;
+    color: #333333;
     background-color: #F4F1EA;
-}
-
-#header {
-    padding: 20px 40px 0;
-    color: #806F58;
 }
 
 button {
     font-family: 'Crimson Text', serif;
     font-weight: 700;
-    font-size: 18px;
     color: #4DB6AC;
-    background-color: #F4F1EA;
     padding: 0;
     border: 0;
 }
 
 button:hover {
+    color: #009688;
     cursor: pointer;
 }
 
 .material-icons-sharp {
-    font-size: 18px;
-    transform: translateY(3px);
+    font-size: 24px;
+    transform: translateY(5px);
+}
+
+/* Header */
+
+#header {
+    padding: 20px 40px 0;
+    color: #806F58;
 }
 
 h1 {
@@ -38,19 +42,71 @@ h1 {
     font-style: italic;
 }
 
+#header button {
+    font-size: 24px;
+    background-color: #F4F1EA;
+}
+
+/* Book List */
+
 #booklist {
     padding: 20px;
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));;
 }
 
 .card {
-    padding: 10px;
+    padding: 20px;
     background-color: #FFFFFF;
     border-left: 5px solid #90816D;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 1fr auto;
 }
 
-#newbook {
-    display: none;
+.cardinfo {
+    margin: 0 0 10px;
+    vertical-align: center;
 }
+
+.cardinfo .material-icons-sharp {
+    font-size: 18px;
+    transform: translateY(3px);
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #806F58;
+    display: block;
+}
+
+.author {
+    font-size: 18px;
+    font-weight: 400;
+    color: #806F58;
+}
+
+h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #806F58;
+    display: inline;
+}
+
+.buttons {
+    height: 100%;
+    vertical-align: bottom;
+    text-align: right;
+    margin: 0;
+}
+
+.card button {
+    font-size: 18px;
+    background-color: #FFFFFF;
+    margin-left: 20px;
+}
+
+/* Add Book  */
