@@ -62,10 +62,11 @@ function enableRating() {
 
 stars = ratingDiv.querySelectorAll("label");
 
-stars.forEach (star => star.addEventListener("click", test));
-stars.forEach (star => star.addEventListener("mouseover", test));
+stars.forEach (star => star.addEventListener("click", addStars));
+stars.forEach (star => star.addEventListener("mouseover", addStars));
+stars.forEach (star => star.addEventListener("mouseout", checkStars));
 
-function test() {
+function addStars() {
     stars.forEach((star) => {
         if (Number(star.getAttribute("for")) <= Number(this.getAttribute("for"))) {
             star.style.color = "#4DB6AC";
@@ -74,6 +75,21 @@ function test() {
         }
     })
 }
+
+function checkStars() {
+    if (!ratingDiv.querySelector("input:checked")) {
+        return;
+    } else {
+    stars.forEach((star) => {
+        // If a star is to the left of the selected star, it's colored
+        if (Number(star.getAttribute("for")) <= Number((ratingDiv.querySelector("input:checked")).getAttribute("id"))) {
+            star.style.color = "#4DB6AC";
+        } else {
+            star.style.color = "#E3E0DA";
+        }
+    })
+}}
+
 
 
 // Add book to list
@@ -119,6 +135,7 @@ function addBook() {
     display(myBook);
     showForm();
     document.getElementById("new-book-form").reset();
+    stars.forEach(star => star.style.color = "#E3E0DA");
 }
 
 let submit = document.getElementById("submit");
