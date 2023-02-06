@@ -93,13 +93,16 @@ readButton = document.getElementById("read");
 readButtons = document.getElementsByName("read");
 readButtons.forEach (button => button.addEventListener("change", enableRating));
 
-let rating = document.getElementById("rating");
+let ratingDiv = document.getElementById("rating");
 
 function enableRating() {
     if (readButton.checked) {
-        rating.style.display = "block";
+        ratingDiv.style.display = "block";
     } else {
-        rating.style.display = "none";
+        ratingDiv.style.display = "none";
+        for (i = 0; i < 5; i++) {
+            document.getElementsByName("rating")[i].checked = false;
+        }
     }
 }
 
@@ -110,36 +113,20 @@ function display(book) {
     let div = document.createElement("div");
     if (!book.rating) {
         div.innerHTML = `
-        <div class="cardinfo">
-        <span class="title">${book.title}</span>
-        by <span class="author">${book.author}</span>
-        </div>
-        <div class="cardinfo">
-        <h3>Status:</h3> ${book.readStatus}
-        </div>
+        <div class="cardinfo"><span class="title">${book.title}</span>by <span class="author">${book.author}</span></div>
+        <div class="cardinfo"><h3>Status:</h3> ${book.readStatus}</div>
         <div class="cardinfo"><h3>Rating:</h3> n/a</div>
-        <div class="cardinfo">
-        <h3>Notes:</h3> ${book.notes}
-        </div>
+        <div class="cardinfo"><h3>Notes:</h3> ${book.notes}</div>
         <div class="buttons"><button class="edit"><span class="material-icons-sharp">edit</span> Edit</button><button class="delete"><span class="material-icons-sharp">delete</span> Delete</button></div>
         `;
     } else {
         let star = `<span class="material-icons-sharp">star_rate</span>`;
         let emptyStar = `<span class="material-icons-sharp">star_outline</span>`;
         div.innerHTML = `
-        <div class="cardinfo">
-        <span class="title">${book.title}</span>
-        by <span class="author">${book.author}</span>
-        </div>
-        <div class="cardinfo">
-        <h3>Status:</h3> ${book.readStatus}
-        </div>
-        <div class="cardinfo">
-        <h3>Rating:</h3> ${star.repeat(book.rating)}${emptyStar.repeat(5 - book.rating)} 
-        </div>
-        <div class="cardinfo">
-        <h3>Notes:</h3> ${book.notes}
-        </div>
+        <div class="cardinfo"><span class="title">${book.title}</span>by <span class="author">${book.author}</span></div>
+        <div class="cardinfo"><h3>Status:</h3> ${book.readStatus}</div>
+        <div class="cardinfo"><h3>Rating:</h3> ${star.repeat(book.rating)}${emptyStar.repeat(5 - book.rating)} </div>
+        <div class="cardinfo"><h3>Notes:</h3> ${book.notes}</div>
         <div class="buttons"><button class="edit"><span class="material-icons-sharp">edit</span> Edit</button><button class="delete"><span class="material-icons-sharp">delete</span> Delete</button></div>
         `;
     }
