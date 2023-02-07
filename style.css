@@ -210,8 +210,12 @@ input[name="rating"] {
     pointer-events: none;
 }
 
-input[name="rating"] + label {
+input[name="rating"] + label, .uncolored {
     color: #E3E0DA;
+}
+
+.colored {
+    color: #4DB6AC;
 }
 
 input[name="rating"] + label:hover {

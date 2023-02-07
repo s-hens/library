@@ -2,20 +2,28 @@
 
 let myLibrary = [
     {
-        title: "Norse Mythology",
+        title: "The Fellowship of the Ring",
+        author: "J.R.R. Tolkien",
+        readStatus: "Currently reading",
+        notes: "Several hours in. Maybe soon the boys will actually get out of the Shire."
+    },
+    {
+        title: "Stardust",
         author: "Neil Gaiman",
         readStatus: "Read",
         rating: "5",
-        notes: "One of my favourites from Gaiman"
+        notes: "My all-time favourite from Gaiman."
     },
     {
-        title: "Gone Girl",
-        author: "Gillian Flynn",
+        title: "The Metamorphosis",
+        author: "Franz Kafka",
         readStatus: "Read",
-        rating: "4",
-        notes: "Wish I hadn't seen the movie first so I could have been really surprised by the twist"
+        rating: "5",
+        notes: "Relatable."
     }
 ];
+
+myLibrary.forEach(book => display(book));
 
 
 // Display "new book" form
@@ -78,10 +86,12 @@ function addStars() {
 
 function checkStars() {
     if (!ratingDiv.querySelector("input:checked")) {
+        stars.forEach(star => star.style.color = "#E3E0DA");
         return;
     } else {
     stars.forEach((star) => {
-        // If a star is to the left of the selected star, it's colored
+        // When user removes mouse from stars, stars revert to displaying the rating which was selected with a click
+        // So an accidental mouse in/mouse out can't appear to change the rating
         if (Number(star.getAttribute("for")) <= Number((ratingDiv.querySelector("input:checked")).getAttribute("id"))) {
             star.style.color = "#4DB6AC";
         } else {
@@ -133,9 +143,11 @@ function addBook() {
     myLibrary.push(myBook);
     //Display new book on page
     display(myBook);
+    //Reset form
     showForm();
     document.getElementById("new-book-form").reset();
     stars.forEach(star => star.style.color = "#E3E0DA");
+    enableRating();
 }
 
 let submit = document.getElementById("submit");
@@ -155,8 +167,8 @@ function display(book) {
         <div class="buttons"><button class="edit"><span class="material-icons-sharp">edit</span> Edit</button><button class="delete"><span class="material-icons-sharp">delete</span> Delete</button></div>
         `;
     } else {
-        let star = `<span class="material-icons-sharp">star_rate</span>`;
-        let emptyStar = `<span class="material-icons-sharp">star_outline</span>`;
+        let star = `<span class="material-icons-sharp colored">star_rate</span>`;
+        let emptyStar = `<span class="material-icons-sharp uncolored">star_rate</span>`;
         div.innerHTML = `
         <div class="cardinfo"><span class="title">${book.title}</span>by <span class="author">${book.author}</span></div>
         <div class="cardinfo"><h3>Status:</h3> ${book.readStatus}</div>
@@ -167,6 +179,23 @@ function display(book) {
     }
     div.classList.add("card");
     document.getElementById("booklist").appendChild(div);
+    div.setAttribute("num", (document.querySelectorAll(".card")).length - 1);
 }
 
-myLibrary.forEach(book => display(book));
+// Delete book
+
+document.getElementById("booklist").addEventListener("click", deleteBook)
+
+//document.querySelectorAll(".delete").forEach (button => button.addEventListener("click", deleteBook));
+
+function deleteBook(e) {
+    if (e.target.classList.contains("delete")) {
+        let book = e.target.parentNode.parentNode;
+        let bookIndex = (book.getAttribute("num"));
+        document.getElementById("booklist").removeChild(book);
+        myLibrary.splice(bookIndex, 1);
+        console.table(myLibrary);
+    } else {
+        return;
+    }
+}
