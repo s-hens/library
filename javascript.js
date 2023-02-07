@@ -37,6 +37,9 @@ closeForm.addEventListener("click", showForm);
 let newBookDiv = document.getElementById("new-book-form1");
 
 function showForm() {
+    //Reset stuff
+    stars.forEach(star => star.style.color = "#E3E0DA");
+    enableRating();
     if (newBookDiv.style.display == "block") {
         document.getElementById("new-book-form").reset();
         newBookDiv.style.display = "none";
