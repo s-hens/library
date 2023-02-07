@@ -230,3 +230,13 @@ input[name="rating"] + label:hover {
     color: #4DB6AC;
     cursor: pointer;
 }
+
+input[type="text"].required {
+    border: 2px solid #B64D57;
+}
+
+.titlerequired, .authorrequired {
+    display: none;
+    color: #B64D57;
+    font-weight: 700;
+}

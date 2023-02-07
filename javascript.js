@@ -15,11 +15,11 @@ let myLibrary = [
         notes: "My all-time favourite from Gaiman."
     },
     {
-        title: "The Metamorphosis",
-        author: "Franz Kafka",
+        title: "There's No Such Thing as an Easy Job",
+        author: "Kikuko Tsumura",
         readStatus: "Read",
-        rating: "5",
-        notes: "Relatable."
+        rating: "4",
+        notes: "This was really enjoyable. Eerie and otherworldly, yet funny and heartwarming at the same time."
     }
 ];
 
@@ -119,6 +119,18 @@ function Book(title, author, readStatus, rating, notes) {
 function addBook() {
     //Prevent page refresh on form submission
     event.preventDefault();
+    //Validate required fields
+    if (document.getElementById("title").value == "") {
+        document.getElementById("title").classList.add("required");
+        document.querySelector(".titlerequired").style.display = "block";
+    }
+    if (document.getElementById("author").value == "") {
+        document.getElementById("author").classList.add("required");
+        document.querySelector(".authorrequired").style.display = "block";
+    }
+    if (document.getElementById("title").value == "" || document.getElementById("author").value == "") {
+        return;
+    }
     //Get title
     let title = document.getElementById("title").value;
     //Get author
@@ -167,6 +179,17 @@ function addBook() {
 
 let submit = document.getElementById("submit");
 submit.addEventListener("click", addBook);
+
+
+// More validating required fields
+
+document.getElementById("title").addEventListener("click", activeTitle)
+document.getElementById("author").addEventListener("click", activeTitle)
+
+function activeTitle() {
+    this.classList.remove("required");
+    document.querySelector(`.${this.id}required`).style.display = "none";
+}
 
 
 // Display book list
