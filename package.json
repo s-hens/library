@@ -9,8 +9,10 @@
     "lint:fix": "eslint . --fix"
   },
   "eslintConfig": {
-    "extends": ["wesbos"]
-  },  
+    "extends": [
+      "wesbos"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/s-hens/library.git"
@@ -21,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/s-hens/library/issues"
   },
-  "homepage": "https://github.com/s-hens/library#readme"
+  "homepage": "https://github.com/s-hens/library#readme",
+  "dependencies": {
+    "eslint-config-wesbos": "^3.2.3"
+  }
 }
