@@ -177,7 +177,6 @@ function addBook() {
     //Reset form
     showForm();
     myLibrary.forEach(book => book.edit = "");
-    //document.getElementById("new-book-form").reset();
     stars.forEach(star => star.style.color = "#E3E0DA");
     enableRating();
 }
