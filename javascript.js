@@ -42,6 +42,7 @@ function showForm() {
     enableRating();
     if (newBookDiv.style.display == "block") {
         document.getElementById("new-book-form").reset();
+        myLibrary.forEach(book => book.edit = "");
         newBookDiv.style.display = "none";
     } else {
         newBookDiv.style.display = "block";
@@ -175,7 +176,8 @@ function addBook() {
     myBook.edit = "";
     //Reset form
     showForm();
-    document.getElementById("new-book-form").reset();
+    myLibrary.forEach(book => book.edit = "");
+    //document.getElementById("new-book-form").reset();
     stars.forEach(star => star.style.color = "#E3E0DA");
     enableRating();
 }
