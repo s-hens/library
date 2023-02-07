@@ -38,6 +38,7 @@ let newBookDiv = document.getElementById("new-book-form1");
 
 function showForm() {
     if (newBookDiv.style.display == "block") {
+        document.getElementById("new-book-form").reset();
         newBookDiv.style.display = "none";
     } else {
         newBookDiv.style.display = "block";
@@ -90,8 +91,8 @@ function checkStars() {
         return;
     } else {
     stars.forEach((star) => {
-        // When user removes mouse from stars, stars revert to displaying the rating which was selected with a click
-        // So an accidental mouse in/mouse out can't appear to change the rating
+        //When user removes mouse from stars, stars revert to displaying the rating which was selected with a click
+        //So an accidental mouse in/mouse out can't appear to change the rating
         if (Number(star.getAttribute("for")) <= Number((ratingDiv.querySelector("input:checked")).getAttribute("id"))) {
             star.style.color = "#4DB6AC";
         } else {
@@ -192,6 +193,46 @@ function deleteBook(e) {
         myLibrary.splice(bookIndex, 1);
         document.getElementById("booklist").innerHTML = ``;
         myLibrary.forEach(book => display(book));
+    } else {
+        return;
+    }
+}
+
+
+// Edit book
+
+document.getElementById("booklist").addEventListener("click", editBook);
+
+function editBook(e) {
+    if (e.target.classList.contains("edit")) {
+        //document.getElementById("new-book-form").reset();
+
+        //Find the book in the array
+        let bookIndex = ((e.target.parentNode.parentNode).getAttribute("num"));
+        let bookData = myLibrary.at(bookIndex)
+        //Get title
+        document.getElementById("title").value = bookData.title;
+        //Get author
+        document.getElementById("author").value = bookData.author;
+        //Get status
+        document.querySelector(`input[value="${bookData.readStatus}"`).checked = true;
+        //Get rating
+        if (bookData.rating) {
+            enableRating();
+            document.querySelector(`input[value="${bookData.rating}"`).checked = true;
+            checkStars();
+        } else {
+            ratingDiv.style.display = "none";
+            checkStars();
+        }
+        //Get notes
+        document.getElementById("notes").value = bookData.notes;
+        //Diplay "edit book" form
+        if (newBookDiv.style.display == "block") {
+            newBookDiv.style.display = "none";
+        } else {
+            newBookDiv.style.display = "block";
+        }
     } else {
         return;
     }

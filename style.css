@@ -117,7 +117,15 @@ h3 {
     margin-left: 20px;
 }
 
-/* Add Book  */
+.colored {
+    color: #4DB6AC;
+}
+
+.uncolored {
+    color: #E3E0DA;
+}
+
+/* Add/Edit Book  */
 
 #new-book-form1 {
     display: none;
@@ -210,12 +218,8 @@ input[name="rating"] {
     pointer-events: none;
 }
 
-input[name="rating"] + label, .uncolored {
+input[name="rating"] + label {
     color: #E3E0DA;
-}
-
-.colored {
-    color: #4DB6AC;
 }
 
 input[name="rating"] + label:hover {
