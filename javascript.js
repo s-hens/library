@@ -184,17 +184,14 @@ function display(book) {
 
 // Delete book
 
-document.getElementById("booklist").addEventListener("click", deleteBook)
-
-//document.querySelectorAll(".delete").forEach (button => button.addEventListener("click", deleteBook));
+document.getElementById("booklist").addEventListener("click", deleteBook);
 
 function deleteBook(e) {
     if (e.target.classList.contains("delete")) {
-        let book = e.target.parentNode.parentNode;
-        let bookIndex = (book.getAttribute("num"));
-        document.getElementById("booklist").removeChild(book);
+        let bookIndex = ((e.target.parentNode.parentNode).getAttribute("num"));
         myLibrary.splice(bookIndex, 1);
-        console.table(myLibrary);
+        document.getElementById("booklist").innerHTML = ``;
+        myLibrary.forEach(book => display(book));
     } else {
         return;
     }
