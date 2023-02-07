@@ -139,11 +139,24 @@ function addBook() {
     if (!notes) {
         notes = "n/a";
     };
-    //Make a new book object and add it to library array
+    //Make a new book object
     let myBook = new Book(title, author, readStatus, rating, notes);
-    myLibrary.push(myBook);
-    //Display new book on page
-    display(myBook);
+    //Determine if this is a new book or an edit of an existing book
+    let edit = myLibrary.find(book => book.edit == true);
+    let editIndex = myLibrary.findIndex(book => book.edit == true);
+    if (myBook.edit == "undefined") {
+        //If new book, push to myLibrary array
+        myLibrary.push(myBook);
+    } else {
+        //If edit of existing book, replace existing entry with the new data
+        myLibrary.splice(editIndex, 1, myBook);
+    }
+    //Display on page
+    document.getElementById("booklist").innerHTML = ``;
+    myLibrary.forEach(book => display(book));
+    //Reset edit flag
+    myBook.edit = "";
+    console.table(myLibrary);
     //Reset form
     showForm();
     document.getElementById("new-book-form").reset();
@@ -205,11 +218,11 @@ document.getElementById("booklist").addEventListener("click", editBook);
 
 function editBook(e) {
     if (e.target.classList.contains("edit")) {
-        //document.getElementById("new-book-form").reset();
-
         //Find the book in the array
         let bookIndex = ((e.target.parentNode.parentNode).getAttribute("num"));
         let bookData = myLibrary.at(bookIndex)
+        //Flag as editing
+        bookData.edit = true;
         //Get title
         document.getElementById("title").value = bookData.title;
         //Get author
