@@ -42,6 +42,9 @@ function showForm() {
         newBookDiv.style.display = "none";
     } else {
         newBookDiv.style.display = "block";
+        //Show correct header
+        document.querySelector(".h2add").style.display = "block";
+        document.querySelector(".h2edit").style.display = "none";
     }
 }
 
@@ -142,9 +145,8 @@ function addBook() {
     //Make a new book object
     let myBook = new Book(title, author, readStatus, rating, notes);
     //Determine if this is a new book or an edit of an existing book
-    let edit = myLibrary.find(book => book.edit == true);
     let editIndex = myLibrary.findIndex(book => book.edit == true);
-    if (myBook.edit == "undefined") {
+    if (editIndex == -1) {
         //If new book, push to myLibrary array
         myLibrary.push(myBook);
     } else {
@@ -156,7 +158,6 @@ function addBook() {
     myLibrary.forEach(book => display(book));
     //Reset edit flag
     myBook.edit = "";
-    console.table(myLibrary);
     //Reset form
     showForm();
     document.getElementById("new-book-form").reset();
@@ -218,6 +219,9 @@ document.getElementById("booklist").addEventListener("click", editBook);
 
 function editBook(e) {
     if (e.target.classList.contains("edit")) {
+        //Show correct header
+        document.querySelector(".h2add").style.display = "none";
+        document.querySelector(".h2edit").style.display = "block";
         //Find the book in the array
         let bookIndex = ((e.target.parentNode.parentNode).getAttribute("num"));
         let bookData = myLibrary.at(bookIndex)

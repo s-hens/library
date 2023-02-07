@@ -127,6 +127,10 @@ h3 {
 
 /* Add/Edit Book  */
 
+.h2add, .h2edit {
+    display: none;
+}
+
 #new-book-form1 {
     display: none;
 }
