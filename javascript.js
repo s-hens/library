@@ -1,12 +1,21 @@
-// Book list
+// Book constructor
+
+function Book(title, author, readStatus, rating, notes) {
+  this.title = title;
+  this.author = author;
+  this.readStatus = readStatus;
+  this.rating = rating;
+  this.notes = notes;
+}
+
+// Elements
 
 const myLibrary = [
   {
     title: 'The Fellowship of the Ring',
     author: 'J.R.R. Tolkien',
     readStatus: 'Currently reading',
-    notes:
-      'Several hours in. Maybe soon the boys will actually get out of the Shire.',
+    notes: 'Several hours in. Maybe soon the boys will actually get out of the Shire.',
   },
   {
     title: 'Stardust',
@@ -20,268 +29,57 @@ const myLibrary = [
     author: 'Kikuko Tsumura',
     readStatus: 'Read',
     rating: '4',
-    notes:
-      'This was really enjoyable. Eerie and otherworldly, yet funny and heartwarming at the same time.',
+    notes: 'This was really enjoyable. Eerie and otherworldly, yet funny and heartwarming at the same time.',
   },
 ];
 
-myLibrary.forEach((book) => display(book));
-
-// Display "new book" form
-
 const openForm = document.getElementById('open-form');
-openForm.addEventListener('click', showForm);
-
 const closeForm = document.getElementById('close-form');
+
+const form = document.getElementById("new-edit-dialog");
+
+// Event listeners
+
+openForm.addEventListener('click', showForm);
 closeForm.addEventListener('click', showForm);
 
-const newBookDiv = document.getElementById('new-book-form1');
-
-function showForm() {
-  // Reset stuff
-  stars.forEach((star) => (star.style.color = '#E3E0DA'));
-  enableRating();
-  if (newBookDiv.style.display === 'block') {
-    document.getElementById('new-book-form').reset();
-    myLibrary.forEach((book) => (book.edit = ''));
-    newBookDiv.style.display = 'none';
-  } else {
-    newBookDiv.style.display = 'block';
-    // Show correct header
-    document.querySelector('.h2add').style.display = 'block';
-    document.querySelector('.h2edit').style.display = 'none';
-  }
-}
-
-// Enable rating only if book is marked as read
-
-const readButton = document.getElementById('read');
-
-const readButtons = document.getElementsByName('read');
-readButtons.forEach((button) =>
-  button.addEventListener('change', enableRating)
-);
-
-const ratingDiv = document.getElementById('rating');
-
-function enableRating() {
-  if (readButton.checked) {
-    ratingDiv.style.display = 'block';
-  } else {
-    ratingDiv.style.display = 'none';
-    for (i = 0; i < 5; i++) {
-      document.getElementsByName('rating')[i].checked = false;
-    }
-  }
-}
-
-// Style rating input
-
-const stars = ratingDiv.querySelectorAll('label');
-
-stars.forEach((star) => star.addEventListener('click', addStars));
-stars.forEach((star) => star.addEventListener('mouseover', addStars));
-stars.forEach((star) => star.addEventListener('mouseout', checkStars));
-
-function addStars() {
-  stars.forEach((star) => {
-    if (Number(star.getAttribute('for')) <= Number(this.getAttribute('for'))) {
-      star.style.color = '#4DB6AC';
-    } else {
-      star.style.color = '#E3E0DA';
-    }
-  });
-}
-
-function checkStars() {
-  if (!ratingDiv.querySelector('input:checked')) {
-    stars.forEach((star) => (star.style.color = '#E3E0DA'));
-  } else {
-    stars.forEach((star) => {
-      // When user removes mouse from stars, stars revert to displaying the rating which was selected with a click
-      // So an accidental mouse in/mouse out can't appear to change the rating
-      if (
-        Number(star.getAttribute('for')) <=
-        Number(ratingDiv.querySelector('input:checked').getAttribute('id'))
-      ) {
-        star.style.color = '#4DB6AC';
-      } else {
-        star.style.color = '#E3E0DA';
-      }
-    });
-  }
-}
-
-// Add book to list
-
-function Book(title, author, readStatus, rating, notes) {
-  this.title = title;
-  this.author = author;
-  this.readStatus = readStatus;
-  this.rating = rating;
-  this.notes = notes;
-}
-
-function addBook() {
-  // Prevent page refresh on form submission
-  event.preventDefault();
-  // Validate required fields
-  if (document.getElementById('title').value === '') {
-    document.getElementById('title').classList.add('required');
-    document.querySelector('.titlerequired').style.display = 'block';
-  }
-  if (document.getElementById('author').value === '') {
-    document.getElementById('author').classList.add('required');
-    document.querySelector('.authorrequired').style.display = 'block';
-  }
-  if (
-    document.getElementById('title').value === '' ||
-    document.getElementById('author').value === ''
-  ) {
-    return;
-  }
-  // Get title
-  const title = document.getElementById('title').value;
-  // Get author
-  const author = document.getElementById('author').value;
-  // Get status
-  let readStatus;
-  for (i = 0; i < 3; i++) {
-    if (document.getElementsByName('read')[i].checked) {
-      readStatus = document.getElementsByName('read')[i].value;
-    }
-  }
-  // Get rating
-  let rating;
-  for (i = 0; i < 5; i++) {
-    if (document.getElementsByName('rating')[i].checked) {
-      rating = document.getElementsByName('rating')[i].value;
-    }
-  }
-  // Get notes
-  let notes = document.getElementById('notes').value;
-  if (!notes) {
-    notes = 'n/a';
-  }
-  // Make a new book object
-  const myBook = new Book(title, author, readStatus, rating, notes);
-  // Determine if this is a new book or an edit of an existing book
-  const editIndex = myLibrary.findIndex((book) => book.edit === true);
-  if (editIndex === -1) {
-    // If new book, push to myLibrary array
-    myLibrary.push(myBook);
-  } else {
-    // If edit of existing book, replace existing entry with the new data
-    myLibrary.splice(editIndex, 1, myBook);
-  }
-  // Display on page
-  document.getElementById('booklist').innerHTML = ``;
-  myLibrary.forEach((book) => display(book));
-  // Reset edit flag
-  myBook.edit = '';
-  // Reset form
-  showForm();
-  myLibrary.forEach((book) => (book.edit = ''));
-  stars.forEach((star) => (star.style.color = '#E3E0DA'));
-  enableRating();
-}
-
-const submit = document.getElementById('submit');
-submit.addEventListener('click', addBook);
-
-// More validating required fields
-
-document.getElementById('title').addEventListener('click', activeTitle);
-document.getElementById('author').addEventListener('click', activeTitle);
-
-function activeTitle() {
-  this.classList.remove('required');
-  document.querySelector(`.${this.id}required`).style.display = 'none';
-}
-
-// Display book list
+// Functions
 
 function display(book) {
-  const div = document.createElement('div');
+  const bookCard = document.createElement("article");
   if (!book.rating) {
-    div.innerHTML = `
-        <div class="cardinfo"><span class="title">${book.title}</span>by <span class="author">${book.author}</span></div>
-        <div class="cardinfo"><h3>Status:</h3> ${book.readStatus}</div>
-        <div class="cardinfo"><h3>Rating:</h3> n/a</div>
-        <div class="cardinfo"><h3>Notes:</h3> ${book.notes}</div>
-        <div class="buttons"><button class="edit"><span class="material-icons-sharp">edit</span> Edit</button><button class="delete"><span class="material-icons-sharp">delete</span> Delete</button></div>
-        `;
+    bookCard.innerHTML = `
+      <section><h2>${book.title}</h2>by <h4>${book.author}</h4></section>
+      <section><h3>Status:</h3> ${book.readStatus}</section>
+      <section><h3>Rating:</h3> n/a</section>
+      <section><h3>Notes:</h3> ${book.notes}</section>
+      <div class="buttons"><button class="edit"><span class="material-icons-sharp">edit</span> Edit</button><button class="delete"><span class="material-icons-sharp">delete</span> Delete</button></div>
+      `;
   } else {
     const star = `<span class="material-icons-sharp colored">star_rate</span>`;
     const emptyStar = `<span class="material-icons-sharp uncolored">star_rate</span>`;
-    div.innerHTML = `
-        <div class="cardinfo"><span class="title">${
-          book.title
-        }</span>by <span class="author">${book.author}</span></div>
-        <div class="cardinfo"><h3>Status:</h3> ${book.readStatus}</div>
-        <div class="cardinfo"><h3>Rating:</h3> ${star.repeat(
-          book.rating
-        )}${emptyStar.repeat(5 - book.rating)} </div>
-        <div class="cardinfo"><h3>Notes:</h3> ${book.notes}</div>
-        <div class="buttons"><button class="edit"><span class="material-icons-sharp">edit</span> Edit</button><button class="delete"><span class="material-icons-sharp">delete</span> Delete</button></div>
+    bookCard.innerHTML = `
+      <section><h2>${book.title}</h2>by <h4>${book.author}</h4></section>
+      <section><h3>Status:</h3> ${book.readStatus}</section>
+      <section><h3>Rating:</h3> ${star.repeat(book.rating)}${emptyStar.repeat(5 - book.rating)}</section>
+      <section><h3>Notes:</h3> ${book.notes}</section>
+      <div class="buttons"><button class="edit"><span class="material-icons-sharp">edit</span> Edit</button><button class="delete"><span class="material-icons-sharp">delete</span> Delete</button></div>
         `;
   }
-  div.classList.add('card');
-  document.getElementById('booklist').appendChild(div);
-  div.setAttribute('num', document.querySelectorAll('.card').length - 1);
+  document.querySelector("main").appendChild(bookCard);
+  bookCard.setAttribute("num", document.querySelectorAll(".card").length - 1);
 }
+myLibrary.forEach((book) => display(book));
 
-// Delete book
 
-document.getElementById('booklist').addEventListener('click', deleteBook);
+function showForm() {
+  // Reset stuff
+  //stars.forEach((star) => (star.style.color = '#E3E0DA'));
+  //enableRating();
 
-function deleteBook(e) {
-  if (e.target.classList.contains('delete')) {
-    const bookIndex = e.target.parentNode.parentNode.getAttribute('num');
-    myLibrary.splice(bookIndex, 1);
-    document.getElementById('booklist').innerHTML = ``;
-    myLibrary.forEach((book) => display(book));
-  }
-}
-
-// Edit book
-
-document.getElementById('booklist').addEventListener('click', editBook);
-
-function editBook(e) {
-  if (e.target.classList.contains('edit')) {
-    // Show correct header
-    document.querySelector('.h2add').style.display = 'none';
-    document.querySelector('.h2edit').style.display = 'block';
-    // Find the book in the array
-    const bookIndex = e.target.parentNode.parentNode.getAttribute('num');
-    const bookData = myLibrary.at(bookIndex);
-    // Flag as editing
-    bookData.edit = true;
-    // Get title
-    document.getElementById('title').value = bookData.title;
-    // Get author
-    document.getElementById('author').value = bookData.author;
-    // Get status
-    document.querySelector(
-      `input[value="${bookData.readStatus}"`
-    ).checked = true;
-    // Get rating
-    if (bookData.rating) {
-      enableRating();
-      document.querySelector(`input[value="${bookData.rating}"`).checked = true;
-      checkStars();
-    } else {
-      ratingDiv.style.display = 'none';
-      checkStars();
-    }
-    // Get notes
-    document.getElementById('notes').value = bookData.notes;
-    // Diplay "edit book" form
-    if (newBookDiv.style.display === 'block') {
-      newBookDiv.style.display = 'none';
-    } else {
-      newBookDiv.style.display = 'block';
-    }
-  }
+  // Show form
+  form.showModal();
+  // Show correct header
+  document.querySelector('.add-head').style.display = 'block';
+  document.querySelector('.edit-head').style.display = 'none';
 }

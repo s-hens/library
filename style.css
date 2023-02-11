@@ -1,31 +1,39 @@
+/* Custom properties */
+
+:root {
+    --articleBGColor: #FFFFFF;
+    --bodyBGColor: #F4F1EA;
+    --lightAccentColor: #BAB0A1;
+    --darkAccentColor: #806F58;
+    --textColor: #333333;
+    --buttonColor: #4DB6AC;
+    --buttonHoverColor: #3A8981;
+    --errorColor: #B64D57;
+}
+
 /* Global */
 
 body {
     margin: 0;
     padding: 0;
+    background-color: var(--bodyBGColor);
     font-family: 'Crimson Text', serif;
     font-weight: 400;
     font-size: 18px;
-    color: #333333;
-    background-color: #F4F1EA;
+    color: var(--textColor);
 }
 
 button {
+    padding: 0 5px;
+    border: 0;
     font-family: 'Crimson Text', serif;
     font-weight: 700;
-    color: #4DB6AC;
-    padding: 0;
-    border: 0;
+    color: var(--buttonColor);
 }
 
 button:hover {
-    color: #009688;
+    color: var(--buttonHoverColor);
     cursor: pointer;
-}
-
-.material-icons-sharp {
-    font-size: 24px;
-    transform: translateY(5px);
 }
 
 h1 {
@@ -33,237 +41,167 @@ h1 {
     font-size: 60px;
     font-weight: 600;
     font-style: italic;
-    color: #806F58;
+    color: var(--darkAccentColor);
 }
 
 h2 {
     margin: 0;
-    font-size: 40px;
-    font-weight: 600;
-    font-style: italic;
-    color: #806F58;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--darkAccentColor);
 }
 
 h3 {
     margin: 0;
     font-size: 18px;
     font-weight: 700;
-    color: #806F58;
+    color: var(--darkAccentColor);
+    display: inline;
+}
+
+h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--darkAccentColor);
     display: inline;
 }
 
 /* Header */
 
-#header {
+header {
     padding: 20px 40px 0;
 }
 
-#header button {
+header button {
     font-size: 24px;
-    background-color: #F4F1EA;
+    background-color: var(--bodyBGColor);
 }
 
-/* Book List */
+header .material-icons-sharp {
+    font-size: 24px;
+    transform: translateY(5px);
+}
 
-#booklist {
+/* Book card container */
+
+main {
     padding: 20px;
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 
-.card {
+/* Book cards */
+
+article {
     padding: 20px;
-    background-color: #FFFFFF;
-    border-left: 5px solid #90816D;
+    background-color: var(--articleBGColor);
+    border-left: 5px solid var(--darkAccentColor);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto 1fr auto;
 }
 
-.cardinfo {
-    margin: 0 0 10px;
-    vertical-align: center;
-}
-
-.cardinfo .material-icons-sharp {
+article .material-icons-sharp {
     font-size: 18px;
     transform: translateY(3px);
 }
 
-.title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #806F58;
-    display: block;
-}
-
-.author {
-    font-size: 18px;
-    font-weight: 400;
-    color: #806F58;
-}
-
-.buttons {
-    height: 100%;
-    vertical-align: bottom;
-    text-align: right;
-    margin: 0;
-}
-
-.card button {
-    font-size: 18px;
-    background-color: #FFFFFF;
-    margin-left: 20px;
-}
-
 .colored {
-    color: #4DB6AC;
+    color: var(--buttonColor);
 }
 
 .uncolored {
-    color: #E3E0DA;
+    color: var(--lightAccentColor);
 }
 
-/* Add/Edit Book  */
-
-.h2add, .h2edit {
-    display: none;
+section {
+    margin: 0 0 10px;
+    vertical-align: center;
 }
 
-#new-book-form1 {
-    display: none;
-}
-
-#new-book-form2 {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
+.buttons {
     margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(51, 51, 51, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 100%;
+    vertical-align: bottom;
+    text-align: right;
 }
 
-#new-book-form3 {
-    width: fit-content;
-    height: fit-content;
-    align-self: center;
-    background-color: #FFFFFF;
+article button {
+    margin-left: 20px;
+    font-size: 18px;
+    background-color: var(--articleBGColor);
+}
+
+/* Add/Edit book */
+
+dialog {
+    background-color: var(--articleBGColor);
     padding: 20px;
+    border: 0;
 }
 
-#new-book-form3 button {
-    font-size: 24px;
-    background-color: #FFFFFF;
-}
-
-#new-book-form-header {
+dialog header {
     padding: 0 10px 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#new-book-form-submit {
-    padding: 10px 10px 0;
+.add-head, .edit-head {
+    display: none;
+}
+
+dialog h1 {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--darkAccentColor);
+    font-style: italic;
+}
+
+dialog::backdrop {
+    background-color: rgba(51, 51, 51, 0.5);
 }
 
 fieldset {
     border: 0;
 }
 
-input[type="text"], textarea {
-    width: 100%;
-    resize: none;
-    border: 2px solid #F4F1EA;
-    padding: 5px;
-    font-family: 'Crimson Text', serif;
-    font-weight: 400;
-    font-size: 18px;
-    color: #333333;
-}
+/* GitHub link */
 
-input[type="text"]:focus, textarea:focus {
-    border: 2px solid #4DB6AC;
-    outline: none;
+.github-corner svg {
+    border: 0;
+    fill: var(--lightAccentColor);
+    color: var(--bodyBGColor);
+    position: absolute;
+    top: 0;
+    right: 0;
 }
-
-input[type="radio"] {
-    appearance: none;
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    border: 2px solid #E3E0DA;
-    background-color: #E3E0DA;
-}
-
-input[type="radio"]:checked {
-    appearance: none;
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    border: 2px solid #E3E0DA;
-    background-color: #4DB6AC;
-}
-
-#rating {
-    display: none;
-}
-
-input[name="rating"] {
-    position: fixed;
-    opacity: 0;
-    pointer-events: none;
-}
-
-input[name="rating"] + label {
-    color: #E3E0DA;
-}
-
-input[name="rating"] + label:hover {
-    color: #4DB6AC;
-    cursor: pointer;
-}
-
-input[type="text"].required {
-    border: 2px solid #B64D57;
-}
-
-.titlerequired, .authorrequired {
-    display: none;
-    color: #B64D57;
-    font-weight: 700;
-}
-
-/* GitHub Link */
 
 .github-corner:hover .octo-arm {
-    animation:octocat-wave 560ms ease-in-out
+    animation: octocat-wave 560ms ease-in-out;
 }
 
 @keyframes octocat-wave {
     0%,100% {
-        transform:rotate(0)
+        transform:rotate(0);
     }
     20%,60% {
-        transform:rotate(-25deg)
+        transform:rotate(-25deg);
     }
     40%,80% {
-        transform:rotate(10deg)
+        transform:rotate(10deg);
     }
 }
 
 @media (max-width:500px){
     .github-corner:hover .octo-arm {
-        animation:none
+        animation: none;
     }
     .github-corner .octo-arm {
-        animation:octocat-wave 560ms ease-in-out
+        animation: octocat-wave 560ms ease-in-out;
     }
 }
