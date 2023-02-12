@@ -12,9 +12,9 @@ Featuring [GitHub Corners](https://github.com/tholman/github-corners/) by Tim Ho
 
 ## I learned about...
 
-- Objects
 - Object constructors
-- More array methods
-- Form styling
-- Form validation using JavaScript
+- Array methods
 - Linting
+- Semantic HTML elements
+- Form styling & validation
+- CSS custom properties
