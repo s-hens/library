@@ -110,8 +110,14 @@ function editBook(e) {
     document.querySelector('#add-head').style.display = 'none';
     document.querySelector('#edit-head').style.display = 'block';
     // Find the book in the array
-    const bookIndex = e.target.parentNode.parentNode.getAttribute('num');
-    const bookData = myLibrary.at(bookIndex);
+    let bookIndex;
+    if (e.target.classList.contains("material-icons-sharp")) {
+      bookIndex = e.target.parentNode.parentNode.parentNode.getAttribute('num');
+      console.log(bookIndex);
+    } else {
+      bookIndex = e.target.parentNode.parentNode.getAttribute('num');
+    }
+    bookData = myLibrary.at(bookIndex);
     // Flag as editing
     bookData.edit = true;
     // Fill form with book details
@@ -124,7 +130,7 @@ function editBook(e) {
       document.querySelector(`input[value="${bookData.rating}"`).checked = true;
       checkStars();
     } else {
-      ratingDiv.style.display = 'none';
+      rating.style.visibility = "hidden";
       checkStars();
     }
 }
