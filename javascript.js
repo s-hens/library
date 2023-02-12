@@ -15,8 +15,7 @@ const myLibrary = [
     title: 'The Fellowship of the Ring',
     author: 'J.R.R. Tolkien',
     readStatus: 'Currently reading',
-    notes:
-      'Several hours in. Maybe soon the boys will actually get out of the Shire.',
+    notes: 'Several hours in. Maybe soon the boys will actually get out of the Shire.',
   },
   {
     title: 'Stardust',
@@ -30,8 +29,7 @@ const myLibrary = [
     author: 'Kikuko Tsumura',
     readStatus: 'Read',
     rating: '4',
-    notes:
-      'This was really enjoyable. Eerie and otherworldly, yet funny and heartwarming at the same time.',
+    notes: 'This was really enjoyable. Eerie and otherworldly, yet funny and heartwarming at the same time.',
   },
 ];
 
@@ -59,9 +57,7 @@ closeForm.addEventListener('click', showForm);
 
 form.addEventListener('submit', addBook);
 
-readStatusButtons.forEach((button) =>
-  button.addEventListener('change', enableRating)
-);
+readStatusButtons.forEach((button) =>button.addEventListener('change', enableRating));
 
 stars.forEach((star) => star.addEventListener('click', addStars));
 stars.forEach((star) => star.addEventListener('mouseover', addStars));
@@ -127,9 +123,7 @@ function editBook(e) {
     // Fill form with book details
     document.getElementById('title').value = bookData.title;
     document.getElementById('author').value = bookData.author;
-    document.querySelector(
-      `input[value="${bookData.readStatus}"`
-    ).checked = true;
+    document.querySelector(`input[value="${bookData.readStatus}"`).checked = true;
     document.getElementById('notes').value = bookData.notes;
     if (bookData.rating) {
       enableRating();
@@ -158,12 +152,10 @@ function display(book) {
     bookCard.innerHTML = `
       <section><h2>${book.title}</h2>by <h4>${book.author}</h4></section>
       <section><h3>Status:</h3> ${book.readStatus}</section>
-      <section><h3>Rating:</h3> ${star.repeat(book.rating)}${emptyStar.repeat(
-      5 - book.rating
-    )}</section>
+      <section><h3>Rating:</h3> ${star.repeat(book.rating)}${emptyStar.repeat(5 - book.rating)}</section>
       <section><h3>Notes:</h3> ${book.notes}</section>
       <div class="buttons"><button class="edit"><span class="material-icons-sharp edit">edit</span> Edit</button><button class="delete"><span class="material-icons-sharp delete">delete</span> Delete</button></div>
-        `;
+      `;
   }
   bookList.appendChild(bookCard);
   bookCard.setAttribute('num', document.querySelectorAll('article').length - 1);
